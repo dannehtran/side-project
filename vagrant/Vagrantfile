@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+
+  # Creates a VirtualBox VM called DEV-SERVER with memory of 4GB and 2 CPU processors
+  config.vm.define "dev" do |dev|
+    dev.vm.provider "virtualbox" do |v|
+      v.name = "DEV-SERVER"
+      v.memory = 4096
+      v.cpus = 2
+    end
+    dev.vm.network "private_network", type: "dhcp"
+    dev.vm.hostname = "dev-SERVER"
+    dev.vm.box = "hashicorp/bionic64"
+    dev.vm.provision :shell, path: "bootstrap.sh"
+  end
+
+  config.vm.define "stg" do |stg|
+    stg.vm.provider "virtualbox" do |v|
+      v.name = "STG-SERVER"
+      v.memory = 4096
+      v.cpus = 2
+    end
+    stg.vm.network "private_network", type: "dhcp"
+    stg.vm.hostname = "STG-SERVER"
+    stg.vm.box = "hashicorp/bionic64"
+    stg.vm.provision :shell, path: "bootstrap.sh"
+  end
+
+
+  # Specifies the ubuntu 18.04 LTS box
+
+  #config.vm.box = "hashicorp/bionic64"
+  
+  # Runs the bootstrap.sh script that installs docker
+  #config.vm.provision :shell, path: "bootstrap.sh"
+end
