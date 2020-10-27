@@ -1,3 +1,3 @@
 FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install samba libpam-winbind git -y
+RUN sudo apt-get update -y
+RUN sudo apt-get install nfs-kernel-server apache2 git -y

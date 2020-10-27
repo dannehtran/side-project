@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  samba:
+    container_name: samba_pdc
+    image: samba/dtran:v1.0
+    ports:
+      - "137:137"
+      - "138:138"
+      - "139:139"
+      - "445:445"
+    deploy:
+      replicas: 1
+    configs:
+      - source: smb.conf
+        target: /etc/samba/smb.conf
+        mode: 0644
+  configs:
+    smb_config:
+      file: ./smb.conf  
