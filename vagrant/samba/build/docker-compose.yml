@@ -11,9 +11,11 @@ services:
     deploy:
       replicas: 1
     configs:
-      - source: smb.conf
+      - source: configs/smb.conf
         target: /etc/samba/smb.conf
         mode: 0644
-  configs:
-    smb_config:
-      file: ./smb.conf  
+    entrypoint:
+      sleep 1000000000000
+configs:
+  smb.conf:
+    file: ./smb.conf  
